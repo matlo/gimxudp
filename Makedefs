@@ -1,0 +1,53 @@
+ifneq ($(OS),Windows_NT)
+prefix = $(DESTDIR)/usr
+exec_prefix = $(prefix)
+libdir = $(exec_prefix)/lib
+endif
+
+ifneq ($(DEBUG),1)
+CFLAGS += -Wall -Wextra -Werror -O3
+CXXFLAGS += -Wall -Wextra -Werror -O3
+else
+ifneq ($(OS),Windows_NT)
+CFLAGS += -Wall -Wextra -Werror -O0 -g -fsanitize=address -fno-omit-frame-pointer
+CXXFLAGS += -Wall -Wextra -Werror -O0 -g -fsanitize=address -fno-omit-frame-pointer
+else
+CFLAGS += -Wall -Wextra -Werror -O0 -g -fno-omit-frame-pointer
+CXXFLAGS += -Wall -Wextra -Werror -O0 -g -fno-omit-frame-pointer
+endif
+endif
+
+NAME=$(shell basename "$(shell pwd)")
+
+LIBNAME=lib$(NAME)
+
+CFLAGS += -DGLOG_NAME=$(NAME)
+CXXFLAGS += -DGLOG_NAME=$(NAME)
+
+ifneq ($(OS),Windows_NT)
+LIB=$(LIBNAME).so
+else
+LIB=$(LIBNAME).dll
+endif
+
+all: $(LIB)
+
+$(LIB): $(OBJECTS)
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(CXXFLAGS) -shared $(OBJECTS) -o $@ $(LDFLAGS) $(LDLIBS)
+
+clean:
+	$(RM) $(LIB) $(OBJECTS)
+
+ifneq ($(OS),Windows_NT)
+install: all
+	mkdir -p $(prefix)
+	mkdir -p $(libdir)
+	cp $(LIB) $(libdir)
+
+uninstall:
+	-$(RM) $(libdir)/$(LIB)
+	-rmdir $(libdir)
+	-rmdir $(prefix)
+
+really-clean: clean uninstall
+endif
