@@ -79,7 +79,7 @@ uint32_t gudp_htonl(uint32_t hostlong);
 /*
  * \brief Convert an unsigned short integer from host byte order to network byte order.
  *
- * \param hostshort  the unsigned integer to convert
+ * \param hostshort  the unsigned short integer to convert
  *
  * \return the converted unsigned short integer
  */
@@ -88,7 +88,7 @@ uint16_t gudp_htons(uint16_t hostshort);
 /*
  * \brief Convert an unsigned short integer from network byte order to host byte order.
  *
- * \param netshort  the unsigned integer to convert
+ * \param netshort  the unsigned short integer to convert
  *
  * \return the converted unsigned short integer
  */
