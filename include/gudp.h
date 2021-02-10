@@ -70,11 +70,29 @@ uint32_t gudp_ntohl(uint32_t netlong);
 /*
  * \brief Convert an unsigned integer from host byte order to network byte order.
  *
- * \param netlong  the unsigned integer to convert
+ * \param hostlong  the unsigned integer to convert
  *
  * \return the converted unsigned integer
  */
 uint32_t gudp_htonl(uint32_t hostlong);
+
+/*
+ * \brief Convert an unsigned short integer from host byte order to network byte order.
+ *
+ * \param hostshort  the unsigned short integer to convert
+ *
+ * \return the converted unsigned short integer
+ */
+uint16_t gudp_htons(uint16_t hostshort);
+
+/*
+ * \brief Convert an unsigned short integer from network byte order to host byte order.
+ *
+ * \param netshort  the unsigned short integer to convert
+ *
+ * \return the converted unsigned short integer
+ */
+uint16_t gudp_ntohs(uint16_t netshort);
 
 /*
  * \brief Open a UDP socket in client or server mode.
