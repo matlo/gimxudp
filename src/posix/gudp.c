@@ -99,6 +99,15 @@ uint32_t gudp_htonl(uint32_t hostlong) {
     return htonl(hostlong);
 }
 
+uint16_t gudp_htons(uint16_t hostshort) {
+    return htons(hostshort);
+}
+
+uint16_t gudp_ntohs(uint16_t netshort) {
+    return ntohs(netshort);
+}
+
+
 struct gudp_socket * gudp_open(enum gudp_mode mode, struct gudp_address address) {
 
     int fd;
